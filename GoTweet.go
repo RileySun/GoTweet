@@ -7,6 +7,8 @@ import (
 	"log"
 	"encoding/json"
 	"io/ioutil"
+
+//	"net/http/httputil"
 )
 
 //Global
@@ -49,11 +51,11 @@ func twitterAPI(url string) []byte {
 	//Generic GET request to Twitter API
 	client := &http.Client{
 		Timeout: time.Second * 10,
-    }
-    
-    req, err := http.NewRequest("GET", url, nil)
-    
-    if err != nil {
+	}
+	
+	req, err := http.NewRequest("GET", url, nil)
+	
+	if err != nil {
 		log.Fatal(err)
 	}
 	
@@ -62,15 +64,15 @@ func twitterAPI(url string) []byte {
 	resp, err := client.Do(req)
 	
 	if err != nil {
-        log.Fatal(err)
-    }
-    
-    responseData, err := ioutil.ReadAll(resp.Body)
-    
-    if err != nil {
-        log.Fatal(err)
-    }
-    
+		log.Fatal(err)
+	}
+	
+	responseData, err := ioutil.ReadAll(resp.Body)
+	
+	if err != nil {
+		log.Fatal(err)
+	}
+	
 	defer resp.Body.Close()
 	
 	return responseData
@@ -86,9 +88,9 @@ func getUserID(user string) string {
 	
 	if err != nil {
 		 fmt.Println(err)
-    }
-    
-    return data.Data[0].ID
+	}
+	
+	return data.Data[0].ID
 }
 
 func getUserTweets(user string) UserTweetReq {
@@ -102,7 +104,18 @@ func getUserTweets(user string) UserTweetReq {
 	
 	if err != nil {
 		 fmt.Println(err)
-    }
+	}
 	
 	return data
 }
+
+/*
+	//out := fmt.Sprintf("%s", responseData)
+	//fmt.Println(out)
+	
+	body, err := httputil.DumpResponse(resp, true)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(body))
+*/
