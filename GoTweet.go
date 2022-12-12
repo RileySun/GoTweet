@@ -108,14 +108,3 @@ func getUserTweets(user string) UserTweetReq {
 	
 	return data
 }
-
-/*
-	//out := fmt.Sprintf("%s", responseData)
-	//fmt.Println(out)
-	
-	body, err := httputil.DumpResponse(resp, true)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(string(body))
-*/
